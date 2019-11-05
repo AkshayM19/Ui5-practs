@@ -1,0 +1,230 @@
+<mvc:View controllerName="Icon_tab_assignment.Icon_tab_assignment.controller.View1" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
+	displayBlock="true"
+	xmlns="sap.m">
+	
+		<IconTabBar
+		id="idIconTabBar"
+		select="handleIconTabBarSelect"
+		class="sapUiResponsiveContentPadding">
+		<items>
+	<!--		<IconTabFilter
+				showAll="true"
+				count="{/ProductCollectionStats/Counts/Total}"
+				text="Products"
+				key="All" />
+			<IconTabSeparator />-->
+			<IconTabFilter
+				icon="sap-icon://begin"
+				iconColor="Positive"
+				count="{/ProductCollectionStats/Counts/Weight/Ok}"
+				text="Personal Details"
+				key="Ok" >
+				<content>
+					<Label text="First Name:"/>
+					<Input value="{empFirstName}"/>
+					<Label text="Last Name:"/>
+					<Input value="{empLastName}"/>
+					<Label text="Salary:"/>
+					<Input value="{salary}" description="INR"/>
+				</content>
+			</IconTabFilter>
+			
+			<IconTabFilter
+				icon = "sap-icon://compare"
+				iconColor="Critical"
+				count="{/ProductCollectionStats/Counts/Weight/Heavy}"
+				text="Skills"
+				key="Heavy" >
+			<!--	<content>-->
+		<!--	<ComboBox
+				items="{
+					path: '/CountriesCollection',
+					sorter: { path: 'text' }
+				}">
+				<core:Item key="{key}" text="{text}" />
+			</ComboBox>-->
+	<!--	</content>-->
+	
+	       	<Table id="idProductsTable"
+		inset="false"
+		items="{
+			path: '/ProductCollection',
+			sorter: {
+				path: 'Name'
+			}
+		}">
+	       				<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="Products" level="H2"/>
+					<ToolbarSpacer />
+					<ComboBox id="idPopinLayout"
+						placeholder="Popin layout options"
+						change="onPopinLayoutChanged">
+						<items>
+							<core:Item  text="Block"
+								key="Block"/>
+							<core:Item  text="Grid Large"
+								key="GridLarge"/>
+							<core:Item  text="Grid Small"
+								key="GridSmall"/>
+						</items>
+					</ComboBox>
+					<Label text="Sticky options:" />
+					<CheckBox text="ColumnHeaders"
+						select="onSelect"/>
+					<CheckBox text="HeaderToolbar"
+						select="onSelect"/>
+					<CheckBox text="InfoToolbar"
+						select="onSelect"/>
+					<ToggleButton id="toggleInfoToolbar"
+						text="Hide/Show InfoToolbar"
+						press="onToggleInfoToolbar" />
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+		   	<infoToolbar>
+			<OverflowToolbar>
+				<Label text="Wide range of available products"/>
+			</OverflowToolbar>
+		</infoToolbar>
+			<columns>
+			<Column
+				width="12em">
+				<Text text="Product" />
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="true">
+				<Text text="Supplier" />
+			</Column>
+			<Column
+				minScreenWidth="Desktop"
+				demandPopin="true"
+				hAlign="End">
+				<Text text="Dimensions" />
+			</Column>
+			<Column
+				minScreenWidth="Desktop"
+				demandPopin="true"
+				hAlign="Center">
+				<Text text="Weight" />
+			</Column>
+			<Column
+				hAlign="End">
+				<Text text="Price" />
+			</Column>
+		</columns>
+			<items>
+			<ColumnListItem>
+				<cells>
+					<ObjectIdentifier
+						title="{Name}"
+						text="{ProductId}"/>
+					<Text
+						text="{SupplierName}" />
+					<Text
+						text="{Width} x {Depth} x {Height} {DimUnit}" />
+					<ObjectNumber
+						number="{WeightMeasure}"
+						unit="{WeightUnit}"
+						state="{
+							parts: [
+								{path: 'WeightMeasure'},
+								{path: 'WeightUnit'}
+							],
+							formatter: 'sap.m.sample.Table.Formatter.weightState'
+						}" />
+					<ObjectNumber
+							number="{
+								parts:[{path:'Price'},{path:'CurrencyCode'}],
+								type: 'sap.ui.model.type.Currency',
+								formatOptions: {showMeasure: false}
+							}"
+							unit="{CurrencyCode}" />
+				</cells>
+			</ColumnListItem>
+		</items>
+		
+	       		
+	     </Table>
+				
+		    </IconTabFilter>
+			<IconTabFilter
+				icon="sap-icon://inventory"
+				iconColor="Negative"
+				count="{/ProductCollectionStats/Counts/Weight/Overweight}"
+				text="Language"
+				key="Overweight" > 
+							<Image src="test-resources/sap/ui/documentation/sdk/images/nature/flatFish.jpg"
+						decorative="false"
+						width="170px"
+						densityAware="false">
+					<detailBox>
+						<LightBox>
+							<LightBoxItem
+									imageSrc="test-resources/sap/ui/documentation/sdk/images/nature/flatFish.jpg"
+									alt="Nature image"
+									title="This is a sample image"
+									subtitle="This is a place for description">
+							</LightBoxItem>
+						</LightBox>
+					</detailBox>
+					<!-- Fixes Hbox layout on Android Stock Browser for Android 5.0 -->
+					<layoutData>
+						<FlexItemData growFactor="1" shrinkFactor="0"/>
+					</layoutData>
+				</Image>
+				
+				<Image src="test-resources/sap/ui/documentation/sdk/images/nature/horses.jpg"
+						decorative="false"
+						width="170px"
+						densityAware="false">
+					<detailBox>
+						<LightBox>
+							<LightBoxItem
+									imageSrc="test-resources/sap/ui/documentation/sdk/images/nature/horses.jpg"
+									alt="Nature image"
+									title="This is a sample image"
+									subtitle="This is a place for description">
+							</LightBoxItem>
+						</LightBox>
+					</detailBox>
+					<!-- Fixes Hbox layout on Android Stock Browser for Android 5.0 -->
+					<layoutData>
+						<FlexItemData growFactor="1" shrinkFactor="0"/>
+					</layoutData>
+				</Image>
+					<Image src="test-resources/sap/ui/documentation/sdk/images/nature/ALotOfElephants_small.jpg"
+						decorative="false"
+						width="170px"
+						densityAware="false">
+					<detailBox>
+						<LightBox>
+							<LightBoxItem
+									imageSrc="test-resources/sap/ui/documentation/sdk/images/nature/ALotOfElephants.jpg"
+									alt="Nature image"
+									title="This is a sample image"
+									subtitle="This is a place for description">
+							</LightBoxItem>
+						</LightBox>
+					</detailBox>
+					<!-- Fixes Hbox layout on Android Stock Browser for Android 5.0 -->
+					<layoutData>
+						<FlexItemData growFactor="1" shrinkFactor="0"/>
+					</layoutData>
+				</Image>
+				
+		    </IconTabFilter>
+		</items>
+	</IconTabBar>
+<!--	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content></content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>-->
+</mvc:View>
